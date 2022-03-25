@@ -101,6 +101,8 @@ const finalArray = relatedInstance.sort((a,b) => b.sharedDna - a.sharedDna);
 
 console.log(finalArray[0]);
 console.log(finalArray[1]);
+console.log(finalArray[2]);
+console.log(finalArray[3]);
 
 
 
