@@ -38,9 +38,9 @@ const pAequorFactory = (uniqueNumber) => {
       let count = 0;
       for (let i = 0; i < this.dna.length; i++) {
         this.dna[i] == array.dna[i] ? count++ : false;
-        console.log([array.dna[i], this.dna[i]]);
+        //console.log([array.dna[i], this.dna[i]]);
       };
-      relatedInstance.push([this.specimenNum, array.specimenNum, ((count / 15) * 100)]);
+      relatedInstance.push({sharedDna:((count / 15) * 100), n1: this.specimenNum, n2: array.specimenNum});
       console.log(`The percentage of dna shared between specimen #${this.specimenNum} and #${array.specimenNum} is ${((count / 15) * 100)} %`);
     },
     willLikelySurvive() {
@@ -82,10 +82,25 @@ const pAequorFactory = (uniqueNumber) => {
 
 const arrayPaequor = [];
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 31; i++) {
   arrayPaequor.push(pAequorFactory(i));
   arrayPaequor[i].willLikelySurvive();
 }
+
+for(let i = 0; i < 30; i++) {
+  let current = arrayPaequor[i];
+  for(let j = 0; j < 30; j++) {
+    if(arrayPaequor[i].specimenNum == arrayPaequor[j].specimenNum) {
+      continue;
+    } else {
+      arrayPaequor[i].compareDNA(arrayPaequor[j]);
+    }
+  }
+};
+const finalArray = relatedInstance.sort((a,b) => b.sharedDna - a.sharedDna);
+
+console.log(finalArray[0]);
+console.log(finalArray[1]);
 
 
 
